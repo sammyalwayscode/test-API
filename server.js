@@ -6,6 +6,21 @@ const studentModel = require('./model/model')
 const mongoose = require('mongoose')
 // const PORT = 2000
 
+
+// connecting to MONGODB Atlas
+mongoose.connect(process.env.DATABASE_URL, {
+  useFindAndModify: false,
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  useCreateIndex: true
+});
+mongoose.connection.once('open', () => {
+  console.log('Connected to database successfully....')
+}).on('error', () => {
+  console.log('Database connection failed.....')
+});
+
+
 //Creating an Object instance
 const app = express()
 
